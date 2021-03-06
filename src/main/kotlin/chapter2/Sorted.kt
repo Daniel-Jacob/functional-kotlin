@@ -8,9 +8,9 @@ class Sorted {
         get() = first()
 
     fun <A> isSorted(aa: List<A>, order: (A, A) -> Boolean): Boolean {
-        fun loop(n: Int): Boolean {
+        tailrec fun loop(n: Int): Boolean {
             return when {
-                n >= aa.size - 1 -> true
+                n > aa.lastIndex -> true
                 order(aa[n], aa[n + 1]) -> loop(n + 1)
                 else -> false
             }
