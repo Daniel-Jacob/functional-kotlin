@@ -29,12 +29,13 @@ to be evaluated is determined by the actual type and not the type at runtime.
 fun <A, B, C> partial1(a: A, f: (A, B) -> C): (B) -> C =
     { b -> f(a, b) }
 
+
+// (A) ->(B) -> (C) can be read as two functions one that takes an a and returns a B and a second that takes a C and returns a C
 fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C = { a -> { b -> f(a, b) } }
 
 fun <A, B, C> uncurry(f: (A) -> (B) -> C): (A, B) -> C = { a, b -> f(a)(b) }
 
 fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C = { gAfterF -> f(g(gAfterF)) }
-
 val Int.show: String
     get() = "the value of this is $this"
 
@@ -45,8 +46,7 @@ fun main() {
     val list = listOf<Int>(3, 2, 3, 4, 5)
     println(Sorted().isSorted(list) { element, next -> next > element })
     val result = curry { a: String, b: String -> args(a, b) }
-    val response = result("hello")
-    println(response("hi friend"))
+    println(result("1")("2"))
 }
 
 fun args(arg1: String, arg2: String): String = arg2
