@@ -45,7 +45,7 @@ val String.reply
 fun main() {
     val list = listOf<Int>(3, 2, 3, 4, 5)
     println(Sorted().isSorted(list) { element, next -> next > element })
-    val result = curry { a: String, b: String -> args(a, b) }
+    val result = curry(::args)
     println(result("1")("2"))
 }
 
